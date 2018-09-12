@@ -76,13 +76,13 @@ class iWorkoutView extends WatchUi.DataField {
 //        textC(dc, 109,  79, Graphics.FONT_XTINY,  		 "PACE");
 //		
 		
-//		var endTime = InfoFields.fmtTime(System.getClockTime() + fields.elapsed.toNumber());
+		
 		//Average Pace
-//		textC(dc, 120, 180, Graphics.FONT_NUMBER_MEDIUM, endTime);
+		textL(dc, 120, 164, Graphics.FONT_NUMBER_MEDIUM, fields.wktEndTime);
 //        textL(dc, 124, 186, Graphics.FONT_XTINY, "A PACE");
 
 		//Time
-        textL(dc, 111, 204, Graphics.FONT_TINY, fields.time);        
+        textL(dc, 113, 204, Graphics.FONT_TINY, fields.time);        
 
 //        drawBattery(dc);
         drawLayout(dc);

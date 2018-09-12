@@ -1,5 +1,6 @@
 using Toybox.Time as Time;
 using Toybox.System as Sys;
+using Toybox.Time.Gregorian;
 
 class InfoFields {
 	
@@ -46,6 +47,29 @@ class InfoFields {
 	var userZones;
 	var cadenceZones = [144, 153, 164, 174, 183, 200];
 	  
+	  
+	var workout = //null;
+    	"#F720#T600&HZ4%Warm up#R5%Repeat 5 Times#T120&HZ4%Run#T60&HZ2%Rest#T60&HZ4%Run#T90&HZ2%Rest#E#%Cool down"; 
+//    	"#T10%Warm Up#T9&HZ3#T5%Rest#T5%Cool Down#";
+//    	"#T120&HZ1%Hello#";
+//		"#T07%Startup#R3#T05%Run#T05%Rest#E#T10%Cool Down#";
+    
+	var inWktStep = false;
+    var wktPtr = 0;
+    
+    var wktDuration = null;
+    var wktDurationN = null;
+    var wktMsg = null;
+    var wktMsgColor = Graphics.COLOR_TRANSPARENT;
+    var wktMsgPostTime = null;
+    var wktMinHR = null;
+    var wktMaxHR = null;
+    var wktRepeat = null;
+    var wktCurrentRepeat = null;
+    var wktRepeatStartPtr = null;
+    var wktFullTime = null;
+    var wktEndTime = null;
+	  
 	function initialize() {
 		var profile = UserProfile.getProfile();
         var sport 	= UserProfile.getCurrentSport();
@@ -66,7 +90,6 @@ class InfoFields {
 //        }
 	}
 	
-	var elapsed;
 	function compute(info) {
 		var status = getActivityStatus(info);
 		if (status == 0) { return; } //Activity paused
@@ -92,7 +115,7 @@ class InfoFields {
         paceAvg = fmtSecs(toPace(info.averageSpeed));
         
         //Timer
-        elapsed = info.timerTime;
+        var elapsed = info.timerTime;
         var elapsedSecs = null;
         if (elapsed != null) {
             elapsed /= 1000;
@@ -106,7 +129,10 @@ class InfoFields {
         timerSecs = elapsedSecs;
 
 		//Time
-        time = fmtTime(Sys.getClockTime());        
+		time = fmtTime(Sys.getClockTime());
+        
+        wktEndTime = fmtEndTime(wktFullTime == null? 0 : wktFullTime);
+//        wktEndTime = 
         		
         //HR	
 		hr = toStr(info.currentHeartRate);
@@ -153,26 +179,6 @@ class InfoFields {
     	}
     }
     
-    var workout = //null;
-    	"#F720#T600&HZ4%Warm up#R5%Repeat 5 Times#T120&HZ4%Run#T60&HZ2%Rest#T60&HZ4%Run#T90&HZ2%Rest#E#%Cool down"; 
-//    	"#T10%Warm Up#T9&HZ3#T5%Rest#T5%Cool Down#";
-//    	"#T120&HZ1%Hello#";
-//		"#T07%Startup#R3#T05%Run#T05%Rest#E#T10%Cool Down#";
-    
-	var inWktStep = false;
-    var wktPtr = 0;
-    
-    var wktDuration = null;
-    var wktDurationN = null;
-    var wktMsg = null;
-    var wktMsgColor = Graphics.COLOR_TRANSPARENT;
-    var wktMsgPostTime = null;
-    var wktMinHR = null;
-    var wktMaxHR = null;
-    var wktRepeat = null;
-    var wktCurrentRepeat = null;
-    var wktRepeatStartPtr = null;
-    var wktFullTime = null;
     function processWorkout(info, status) {
     	if(status != 1) { 
     		return; // Return if not running
@@ -432,6 +438,21 @@ class InfoFields {
 
     function fmtTime(clock) {
         var h = clock.hour;
+        if (!Sys.getDeviceSettings().is24Hour) {
+            if (h > 12) {
+                h -= 12;
+            } else if (h == 0) {
+                h += 12;
+            }
+        }
+        return "" + h + ":" + clock.min.format("%02d");
+    }
+    
+    function fmtEndTime(elapsed) {
+    	var time = new Time.Moment(Time.now().value() + elapsed);
+    	var clock = Gregorian.info(time, Time.FORMAT_MEDIUM);
+        var h = clock.hour;
+        
         if (!Sys.getDeviceSettings().is24Hour) {
             if (h > 12) {
                 h -= 12;
