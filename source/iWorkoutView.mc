@@ -63,25 +63,27 @@ class iWorkoutView extends WatchUi.DataField {
 //	        }
 //        } 
 //        
-//		//Timer
-//		textL(dc, 112, 45, Graphics.FONT_NUMBER_MEDIUM,  fields.timer);
-//        if (fields.timerSecs != null) {
-//            var length = dc.getTextWidthInPixels(fields.timer, Graphics.FONT_NUMBER_MEDIUM);
-//            textL(dc, 112 + length + 1, 55, Graphics.FONT_NUMBER_MILD, fields.timerSecs);
-//        }
-//        textL(dc, 120, 18, Graphics.FONT_XTINY,  "TIMER");
+		//Timer
+		textL(dc, 120, 109, Graphics.FONT_NUMBER_MEDIUM,  fields.timer);
+        if (fields.timerSecs != null) {
+            var length = dc.getTextWidthInPixels(fields.timer, Graphics.FONT_NUMBER_MEDIUM);
+            textL(dc, 120 + length + 1, 109, Graphics.FONT_NUMBER_MILD, fields.timerSecs);
+        }
+        textL(dc, 128, 82, Graphics.FONT_XTINY,  "TIMER");
 //        
 //        //Pace
 //        textC(dc, 109, 107, Graphics.FONT_NUMBER_MEDIUM, fields.pace10s);
 //        textC(dc, 109,  79, Graphics.FONT_XTINY,  		 "PACE");
 //		
-//		//Average Pace
-//		textC(dc, 150, 154, Graphics.FONT_NUMBER_MEDIUM, fields.paceAvg);
+		
+//		var endTime = InfoFields.fmtTime(System.getClockTime() + fields.elapsed.toNumber());
+		//Average Pace
+//		textC(dc, 120, 180, Graphics.FONT_NUMBER_MEDIUM, endTime);
 //        textL(dc, 124, 186, Graphics.FONT_XTINY, "A PACE");
-//
-//		//Time
-//        textL(dc, 75, 206, Graphics.FONT_TINY, fields.time);        
-//
+
+		//Time
+        textL(dc, 111, 204, Graphics.FONT_TINY, fields.time);        
+
 //        drawBattery(dc);
         drawLayout(dc);
 

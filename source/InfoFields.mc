@@ -59,13 +59,14 @@ class InfoFields {
         }
         curPos = 0;
         
-        workout = Application.getApp().getProperty("workout");
+//        workout = Application.getApp().getProperty("workout");
         
 //        for(var i = 0; i < 5; i++) {
 //        	System.println("Zone " + (i+1) + ":  " + userZones[i] + " - " + userZones[i+1]);
 //        }
 	}
 	
+	var elapsed;
 	function compute(info) {
 		var status = getActivityStatus(info);
 		if (status == 0) { return; } //Activity paused
@@ -91,7 +92,7 @@ class InfoFields {
         paceAvg = fmtSecs(toPace(info.averageSpeed));
         
         //Timer
-        var elapsed = info.timerTime;
+        elapsed = info.timerTime;
         var elapsedSecs = null;
         if (elapsed != null) {
             elapsed /= 1000;
@@ -152,8 +153,8 @@ class InfoFields {
     	}
     }
     
-    var workout = null;
-//    	"#F720#T600&HZ4%Warm up#R5%Repeat 5 Times#T120&HZ4%Run#T60&HZ2%Rest#T60&HZ4%Run#T90&HZ2%Rest#E#%Cool down"; 
+    var workout = //null;
+    	"#F720#T600&HZ4%Warm up#R5%Repeat 5 Times#T120&HZ4%Run#T60&HZ2%Rest#T60&HZ4%Run#T90&HZ2%Rest#E#%Cool down"; 
 //    	"#T10%Warm Up#T9&HZ3#T5%Rest#T5%Cool Down#";
 //    	"#T120&HZ1%Hello#";
 //		"#T07%Startup#R3#T05%Run#T05%Rest#E#T10%Cool Down#";
