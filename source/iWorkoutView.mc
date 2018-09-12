@@ -18,84 +18,84 @@ class iWorkoutView extends WatchUi.DataField {
 		dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_WHITE);
         // horizontal lines
         dc.drawLine(0,  72, 218,  72);
-        dc.drawLine(0, 132, 218, 132);
-        dc.drawLine(0, 198, 218, 198);
-        
+//        dc.drawLine(0,  55, 109, 55);
+        dc.drawLine(0, 144, 109, 144);
+//        
         // vertical lines
-        dc.drawLine(109,  0,  109,  72);
-        dc.drawLine( 72,  72,  72, 132);
-        dc.drawLine(144,  72, 144, 132);
-        dc.drawLine(109, 132, 109, 198);    
+        dc.drawLine(109,  72,  109,  218);
+//        dc.drawLine( 72,  72,  72, 132);
+//        dc.drawLine(144,  72, 144, 132);
+//        dc.drawLine(109, 132, 109, 198);    
     }
 
     function onUpdate(dc) {
         dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
         dc.clear();
         
-        //Cadence
-        drawBackground(dc, fields.cadenceZoneColor, 00, 73, 72, 60);
-        textC(dc, 36, 107, Graphics.FONT_NUMBER_MEDIUM, fields.cadence);
-        textC(dc, 36, 79, Graphics.FONT_XTINY,  "CAD");
-                
-        //HR
-		drawBackground(dc, fields.hrZoneColor, 145, 73, 73, 60);
-        textC(dc, 180, 107, Graphics.FONT_NUMBER_MEDIUM, 
-        	fields.counter % 3 == 0 ? fields.hr : fields.hrZone);
-        textC(dc, 180, 79,  Graphics.FONT_XTINY,  	     "HR");
-        
-        //Distance 
-        textC(dc, 66, 154, Graphics.FONT_NUMBER_MEDIUM, fields.distance);
-        textR(dc, 105, 186, Graphics.FONT_XTINY, 
-    		System.getDeviceSettings().distanceUnits == System.UNIT_METRIC? "km" : "mi");
-        
-        //Calories
-        if(fields.wktDuration == null) {
-			textL(dc, 36, 45, Graphics.FONT_NUMBER_MEDIUM,  fields.calories);
-	        textL(dc, 55, 18, Graphics.FONT_XTINY,  "CAL");
-        } else {
-        	if(fields.counter % 3 == 0 && fields.wktFullTime != null) {
-		        textL(dc, 36, 45, Graphics.FONT_NUMBER_MEDIUM,  InfoFields.fmtSecs(fields.wktFullTime));
-		        textL(dc, 55, 18, Graphics.FONT_XTINY,  "F TIM");
-		        
-	        } else {
-		        textL(dc, 36, 45, Graphics.FONT_NUMBER_MEDIUM,  fields.wktDuration);
-		        textL(dc, 55, 18, Graphics.FONT_XTINY,  "I TIM");
-	        }
-        } 
-        
-		//Timer
-		textL(dc, 112, 45, Graphics.FONT_NUMBER_MEDIUM,  fields.timer);
-        if (fields.timerSecs != null) {
-            var length = dc.getTextWidthInPixels(fields.timer, Graphics.FONT_NUMBER_MEDIUM);
-            textL(dc, 112 + length + 1, 55, Graphics.FONT_NUMBER_MILD, fields.timerSecs);
-        }
-        textL(dc, 120, 18, Graphics.FONT_XTINY,  "TIMER");
-        
-        //Pace
-        textC(dc, 109, 107, Graphics.FONT_NUMBER_MEDIUM, fields.pace10s);
-        textC(dc, 109,  79, Graphics.FONT_XTINY,  		 "PACE");
-		
-		//Average Pace
-		textC(dc, 150, 154, Graphics.FONT_NUMBER_MEDIUM, fields.paceAvg);
-        textL(dc, 124, 186, Graphics.FONT_XTINY, "A PACE");
-
-		//Time
-        textL(dc, 75, 206, Graphics.FONT_TINY, fields.time);        
-
-        drawBattery(dc);
+//        //Cadence
+//        drawBackground(dc, fields.cadenceZoneColor, 00, 73, 72, 60);
+//        textC(dc, 36, 107, Graphics.FONT_NUMBER_MEDIUM, fields.cadence);
+//        textC(dc, 36, 79, Graphics.FONT_XTINY,  "CAD");
+//                
+//        //HR
+//		drawBackground(dc, fields.hrZoneColor, 145, 73, 73, 60);
+//        textC(dc, 180, 107, Graphics.FONT_NUMBER_MEDIUM, 
+//        	fields.counter % 3 == 0 ? fields.hr : fields.hrZone);
+//        textC(dc, 180, 79,  Graphics.FONT_XTINY,  	     "HR");
+//        
+//        //Distance 
+//        textC(dc, 66, 154, Graphics.FONT_NUMBER_MEDIUM, fields.distance);
+//        textR(dc, 105, 186, Graphics.FONT_XTINY, 
+//    		System.getDeviceSettings().distanceUnits == System.UNIT_METRIC? "km" : "mi");
+//        
+//        //Calories
+//        if(fields.wktDuration == null) {
+//			textL(dc, 36, 45, Graphics.FONT_NUMBER_MEDIUM,  fields.calories);
+//	        textL(dc, 55, 18, Graphics.FONT_XTINY,  "CAL");
+//        } else {
+//        	if(fields.counter % 3 == 0 && fields.wktFullTime != null) {
+//		        textL(dc, 36, 45, Graphics.FONT_NUMBER_MEDIUM,  InfoFields.fmtSecs(fields.wktFullTime));
+//		        textL(dc, 55, 18, Graphics.FONT_XTINY,  "F TIM");
+//		        
+//	        } else {
+//		        textL(dc, 36, 45, Graphics.FONT_NUMBER_MEDIUM,  fields.wktDuration);
+//		        textL(dc, 55, 18, Graphics.FONT_XTINY,  "I TIM");
+//	        }
+//        } 
+//        
+//		//Timer
+//		textL(dc, 112, 45, Graphics.FONT_NUMBER_MEDIUM,  fields.timer);
+//        if (fields.timerSecs != null) {
+//            var length = dc.getTextWidthInPixels(fields.timer, Graphics.FONT_NUMBER_MEDIUM);
+//            textL(dc, 112 + length + 1, 55, Graphics.FONT_NUMBER_MILD, fields.timerSecs);
+//        }
+//        textL(dc, 120, 18, Graphics.FONT_XTINY,  "TIMER");
+//        
+//        //Pace
+//        textC(dc, 109, 107, Graphics.FONT_NUMBER_MEDIUM, fields.pace10s);
+//        textC(dc, 109,  79, Graphics.FONT_XTINY,  		 "PACE");
+//		
+//		//Average Pace
+//		textC(dc, 150, 154, Graphics.FONT_NUMBER_MEDIUM, fields.paceAvg);
+//        textL(dc, 124, 186, Graphics.FONT_XTINY, "A PACE");
+//
+//		//Time
+//        textL(dc, 75, 206, Graphics.FONT_TINY, fields.time);        
+//
+//        drawBattery(dc);
         drawLayout(dc);
 
-		if(fields.alertLabel != null) {
-			alert(dc, fields.alertLabel, fields.alertValue);
-		}  
-		
-		if(fields.wktMsg != null) {
-			workoutMessage(dc, fields.wktMsg, fields.wktMsgColor);
-			if(fields.wktRepeat != null) {
-				textC(dc, 109,  45, Graphics.FONT_TINY, 
-					"Repeat " + fields.wktCurrentRepeat.format("%d") + "/" + fields.wktRepeat.format("%d"));
-			}
-		}
+//		if(fields.alertLabel != null) {
+//			alert(dc, fields.alertLabel, fields.alertValue);
+//		}  
+//		
+//		if(fields.wktMsg != null) {
+//			workoutMessage(dc, fields.wktMsg, fields.wktMsgColor);
+//			if(fields.wktRepeat != null) {
+//				textC(dc, 109,  45, Graphics.FONT_TINY, 
+//					"Repeat " + fields.wktCurrentRepeat.format("%d") + "/" + fields.wktRepeat.format("%d"));
+//			}
+//		}
 		
         return true;
 	}
