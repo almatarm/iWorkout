@@ -69,6 +69,7 @@ class InfoFields {
     var wktRepeatStartPtr = null;
     var wktFullTime = null;
     var wktEndTime = null;
+    var wktDesc = null;
 	  
 	function initialize() {
 		var profile = UserProfile.getProfile();
@@ -88,7 +89,6 @@ class InfoFields {
 //        for(var i = 0; i < 5; i++) {
 //        	System.println("Zone " + (i+1) + ":  " + userZones[i] + " - " + userZones[i+1]);
 //        }
-		System.println(workout);
 	}
 	
 	function compute(info) {
@@ -185,6 +185,7 @@ class InfoFields {
     		return; // Return if not running
     	}
     	
+    	wktDesc = wktMsg == null? wktDesc : wktMsg;
 //    	if(wktFullTime == null) {
 //    		wktFullTime = computeWorkoutFullTime();
 //    	}
@@ -215,7 +216,7 @@ class InfoFields {
     	
     	if(wktMaxHR != null && info.currentHeartRate > wktMaxHR 
     		&& info.elapsedTime - wktMsgPostTime > 20000) {
-    		wktMsg = "Above HR\n" + (info.currentHeartRate - wktMinHR ).format("%d");
+    		wktMsg = "Above HR\n-" + (info.currentHeartRate - wktMaxHR ).format("%d");
     		wktMsgColor = Graphics.COLOR_YELLOW;
     		wktMsgPostTime = info.elapsedTime;
     	}
@@ -238,7 +239,7 @@ class InfoFields {
     		
     		wktMsg = curWktStep.find("%") != null ? curWktStep.substring(curWktStep.find("%") + 1, curWktStep.length()) : "";
 //    		wktMsg = curWktStep.substring(curWktStep.find("%") + 1, curWktStep.length());
-    		
+    		wktDesc = wktMsg;
     		curWktStep = curWktStep.find("%") != null ? curWktStep.substring(0, curWktStep.find("%")) : curWktStep;
     		
     		while(curWktStep.length() != 0) {
@@ -423,6 +424,7 @@ class InfoFields {
         }
 
         var s = secs.toLong();
+        s = s > 0 ? s : 0;
         var hours = s / 3600;
         s -= hours * 3600;
         var minutes = s / 60;

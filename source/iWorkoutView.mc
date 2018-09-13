@@ -37,11 +37,27 @@ class iWorkoutView extends WatchUi.DataField {
 //        textC(dc, 36, 107, Graphics.FONT_NUMBER_MEDIUM, fields.cadence);
 //        textC(dc, 36, 79, Graphics.FONT_XTINY,  "CAD");
 //                
-//        //HR
-//		drawBackground(dc, fields.hrZoneColor, 145, 73, 73, 60);
-//        textC(dc, 180, 107, Graphics.FONT_NUMBER_MEDIUM, 
-//        	fields.counter % 3 == 0 ? fields.hr : fields.hrZone);
-//        textC(dc, 180, 79,  Graphics.FONT_XTINY,  	     "HR");
+        //HR
+		drawBackground(dc, fields.hrZoneColor, 0, 73, 109, 72);
+        textC(dc, 55, 109, Graphics.FONT_NUMBER_MEDIUM, 
+        	fields.counter % 3 == 0 ? fields.hr : fields.hrZone);
+        textC(dc, 55, 81,  Graphics.FONT_XTINY,  	     "HR");
+//        
+//        if(fields.wktMinHR != null && fields.hrN < fields.wktMinHR) {
+//        	System.prinln(fields.hrN);
+//        	System.println(fields.wktMinHR);
+//        	System.println("-" +  
+//    		( fields.wktMinHR - fields.hrN ).format("%d"));
+////    		textL(dc, 135, 106,  Graphics.FONT_XTINY, "-" +  
+////    		( fields.wktMinHR - fields.hrN ).format("%d"));
+//    	}
+//    	
+//    	if(wktMaxHR != null && info.currentHeartRate > wktMaxHR 
+//    		&& info.elapsedTime - wktMsgPostTime > 20000) {
+//    		wktMsg = "Above HR\n-" + (info.currentHeartRate - wktMaxHR ).format("%d");
+//    		wktMsgColor = Graphics.COLOR_YELLOW;
+//    		wktMsgPostTime = info.elapsedTime;
+//    	}
 //        
 //        //Distance 
 //        textC(dc, 66, 154, Graphics.FONT_NUMBER_MEDIUM, fields.distance);
@@ -63,44 +79,46 @@ class iWorkoutView extends WatchUi.DataField {
 //	        }
 //        } 
 //        
-		System.println(fields.wktDuration);
 		//Timer
 		if(fields.wktDuration == null) {
-			textL(dc, 120, 109, Graphics.FONT_NUMBER_MEDIUM,  fields.timer);
+			textR(dc, 178, 109, Graphics.FONT_NUMBER_MEDIUM,  fields.timer);
 	        if (fields.timerSecs != null) {
 	            var length = dc.getTextWidthInPixels(fields.timer, Graphics.FONT_NUMBER_MEDIUM);
-	            textL(dc, 120 + length + 1, 109, Graphics.FONT_NUMBER_MILD, fields.timerSecs);
+	            textL(dc, 178 + length + 1, 109, Graphics.FONT_NUMBER_MILD, fields.timerSecs);
 	        }
-	        textL(dc, 128, 82, Graphics.FONT_XTINY,  "TIMER");
+	        textR(dc, 186, 82, Graphics.FONT_XTINY,  "TIMER");
 	    } else {
         	if(fields.counter % 3 == 0 && fields.wktFullTime != null) {
-		        textL(dc, 120, 109, Graphics.FONT_NUMBER_MEDIUM,  InfoFields.fmtSecs(fields.wktFullTime));
-		        textL(dc, 128, 82, Graphics.FONT_XTINY,  "F TIM");		        
+		        textR(dc, 178, 109, Graphics.FONT_NUMBER_MEDIUM,  InfoFields.fmtSecs(fields.wktFullTime));
+		        textR(dc, 188, 82, Graphics.FONT_XTINY,  "F TIM");		        
 	        } else {
-				textL(dc, 120, 109, Graphics.FONT_NUMBER_MEDIUM,  fields.timer);
+				textR(dc, 178, 109, Graphics.FONT_NUMBER_MEDIUM,  fields.timer);
 		        if (fields.timerSecs != null) {
 		            var length = dc.getTextWidthInPixels(fields.timer, Graphics.FONT_NUMBER_MEDIUM);
-		            textL(dc, 120 + length + 1, 109, Graphics.FONT_NUMBER_MILD, fields.timerSecs);
+		            textL(dc, 178 + length + 1, 109, Graphics.FONT_NUMBER_MILD, fields.timerSecs);
 		        }
-		        textL(dc, 128, 82, Graphics.FONT_XTINY,  "TIMER");
+		        textL(dc, 186, 82, Graphics.FONT_XTINY,  "TIMER");
 	        }	    
 	    } 
-//        
+        
 //        //Pace
 //        textC(dc, 109, 107, Graphics.FONT_NUMBER_MEDIUM, fields.pace10s);
 //        textC(dc, 109,  79, Graphics.FONT_XTINY,  		 "PACE");
-//		
+		
 		
 		if(fields.wktFullTime == null) {
-			textR(dc, 177, 164, Graphics.FONT_NUMBER_MEDIUM, fields.fmtSecs(fields.wktFullTime));
+			textR(dc, 178, 164, Graphics.FONT_NUMBER_MEDIUM, fields.fmtSecs(fields.wktFullTime));
 	    } else {
-        	if(fields.counter % 2 == 0 && fields.wktFullTime != null) {
-		        textR(dc, 177, 164, Graphics.FONT_NUMBER_MEDIUM, fields.wktEndTime);
+        	if(fields.counter % 3 == 0 && fields.wktFullTime != null) {
+		        textR(dc, 178, 164, Graphics.FONT_NUMBER_MEDIUM, fields.wktEndTime);
 	        } else {
-				textR(dc, 177, 164, Graphics.FONT_NUMBER_MEDIUM, fields.fmtSecs(fields.wktFullTime));
+				textR(dc, 178, 164, Graphics.FONT_NUMBER_MEDIUM, fields.fmtSecs(fields.wktFullTime));
 	        }	    
 	    } 
 		
+		if(fields.wktDesc != null) {
+			textC(dc, 109, 40, Graphics.FONT_TINY, fields.wktDesc);
+		}
 		//Interval Timer
 		//Elapsed Time
 		//Workout Remaining Time
