@@ -20,9 +20,10 @@ class iWorkoutView extends WatchUi.DataField {
         dc.drawLine(0,  72, 218,  72);
 //        dc.drawLine(0,  55, 109, 55);
         dc.drawLine(0, 144, 109, 144);
+        dc.drawLine(0, 198, 218, 198);
 //        
         // vertical lines
-        dc.drawLine(109,  72,  109,  218);
+        dc.drawLine(109,  72,  109,  198);
 //        dc.drawLine( 72,  72,  72, 132);
 //        dc.drawLine(144,  72, 144, 132);
 //        dc.drawLine(109, 132, 109, 198);    
@@ -31,6 +32,9 @@ class iWorkoutView extends WatchUi.DataField {
     function onUpdate(dc) {
         dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
         dc.clear();
+        
+		//Time
+        textL(dc, 75, 206, Graphics.FONT_TINY, fields.time);       
         
 //        //Cadence
 //        drawBackground(dc, fields.cadenceZoneColor, 00, 73, 72, 60);
@@ -128,8 +132,7 @@ class iWorkoutView extends WatchUi.DataField {
 		
 //        textL(dc, 124, 186, Graphics.FONT_XTINY, "A PACE");
 
-		//Time
-        textL(dc, 113, 204, Graphics.FONT_TINY, fields.time);        
+		     
 
 //        drawBattery(dc);
         drawLayout(dc);
