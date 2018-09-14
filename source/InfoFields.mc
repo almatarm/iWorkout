@@ -15,6 +15,7 @@ class InfoFields {
 	var hrZone;
 	var hrN;
 	var hrZoneColor;
+	var hrLabel;
 	
 	var cadence;
     var cadenceN;
@@ -70,6 +71,8 @@ class InfoFields {
     var wktFullTime = null;
     var wktEndTime = null;
     var wktDesc = null;
+    
+    var line1, line2, line3;
 	  
 	function initialize() {
 		var profile = UserProfile.getProfile();
@@ -140,6 +143,13 @@ class InfoFields {
 		hrN = info.currentHeartRate;
         hrZoneColor = zoneColor(hrN, userZones);
         hrZone = zoneNumber(hrN, userZones).format("%.1f");
+        
+        hrLabel = "HR";
+        if(wktMinHR != null && info.currentHeartRate < wktMinHR) {
+    		hrLabel = "Below HR\n+" + ( wktMinHR - info.currentHeartRate ).format("%d");
+    	} else if(wktMaxHR != null && info.currentHeartRate > wktMaxHR) {
+    		hrLabel = "Above HR\n-" + (info.currentHeartRate - wktMaxHR ).format("%d");
+    	}
         
         //Cadence
         cadence = toStr(info.currentCadence);
@@ -232,6 +242,7 @@ class InfoFields {
     	if( curWktStep != null && curWktStep.length() > 0) {
     		if(curWktStep.length() == 1) {
     			wktMsg = "Workout Ended!";
+    			line1 = "Workout Ended!";
     			wktMsgColor = Graphics.COLOR_GREEN;
     			wktMsgPostTime = info.elapsedTime;
     			return;
@@ -268,6 +279,7 @@ class InfoFields {
     					wktMinHR = userZones[zone -1];
     					wktMaxHR = userZones[zone];
     					wktMsg += "\n Zone " + zone.format("%d");
+    					line2 = "Zone " + zone.format("%d");
     				}
     				inWktStep = true;
     			}

@@ -38,10 +38,10 @@ class iWorkoutView extends WatchUi.DataField {
 //        textC(dc, 36, 79, Graphics.FONT_XTINY,  "CAD");
 //                
         //HR
-		drawBackground(dc, fields.hrZoneColor, 0, 73, 109, 72);
-        textC(dc, 55, 109, Graphics.FONT_NUMBER_MEDIUM, 
-        	fields.counter % 3 == 0 ? fields.hr : fields.hrZone);
-        textC(dc, 55, 81,  Graphics.FONT_XTINY,  	     "HR");
+//		drawBackground(dc, fields.hrZoneColor, 0, 73, 109, 72);
+//        textC(dc, 55, 109, Graphics.FONT_NUMBER_MEDIUM, 
+//        	fields.counter % 3 == 0 ? fields.hr : fields.hrZone);
+//        textC(dc, 55, 81,  Graphics.FONT_XTINY,  	     "HR");
 //        
 //        if(fields.wktMinHR != null && fields.hrN < fields.wktMinHR) {
 //        	System.prinln(fields.hrN);
@@ -79,46 +79,46 @@ class iWorkoutView extends WatchUi.DataField {
 //	        }
 //        } 
 //        
-		//Timer
-		if(fields.wktDuration == null) {
-			textR(dc, 178, 109, Graphics.FONT_NUMBER_MEDIUM,  fields.timer);
-	        if (fields.timerSecs != null) {
-	            var length = dc.getTextWidthInPixels(fields.timer, Graphics.FONT_NUMBER_MEDIUM);
-	            textL(dc, 178 + length + 1, 109, Graphics.FONT_NUMBER_MILD, fields.timerSecs);
-	        }
-	        textR(dc, 186, 82, Graphics.FONT_XTINY,  "TIMER");
-	    } else {
-        	if(fields.counter % 3 == 0 && fields.wktFullTime != null) {
-		        textR(dc, 178, 109, Graphics.FONT_NUMBER_MEDIUM,  InfoFields.fmtSecs(fields.wktFullTime));
-		        textR(dc, 188, 82, Graphics.FONT_XTINY,  "F TIM");		        
-	        } else {
-				textR(dc, 178, 109, Graphics.FONT_NUMBER_MEDIUM,  fields.timer);
-		        if (fields.timerSecs != null) {
-		            var length = dc.getTextWidthInPixels(fields.timer, Graphics.FONT_NUMBER_MEDIUM);
-		            textL(dc, 178 + length + 1, 109, Graphics.FONT_NUMBER_MILD, fields.timerSecs);
-		        }
-		        textL(dc, 186, 82, Graphics.FONT_XTINY,  "TIMER");
-	        }	    
-	    } 
+//		//Timer
+//		if(fields.wktDuration == null) {
+//			textR(dc, 178, 109, Graphics.FONT_NUMBER_MEDIUM,  fields.timer);
+//	        if (fields.timerSecs != null) {
+//	            var length = dc.getTextWidthInPixels(fields.timer, Graphics.FONT_NUMBER_MEDIUM);
+//	            textL(dc, 178 + length + 1, 109, Graphics.FONT_NUMBER_MILD, fields.timerSecs);
+//	        }
+//	        textR(dc, 186, 82, Graphics.FONT_XTINY,  "TIMER");
+//	    } else {
+//        	if(fields.counter % 3 == 0 && fields.wktFullTime != null) {
+//		        textR(dc, 178, 109, Graphics.FONT_NUMBER_MEDIUM,  InfoFields.fmtSecs(fields.wktFullTime));
+//		        textR(dc, 188, 82, Graphics.FONT_XTINY,  "F TIM");		        
+//	        } else {
+//				textR(dc, 178, 109, Graphics.FONT_NUMBER_MEDIUM,  fields.timer);
+//		        if (fields.timerSecs != null) {
+//		            var length = dc.getTextWidthInPixels(fields.timer, Graphics.FONT_NUMBER_MEDIUM);
+//		            textL(dc, 178 + length + 1, 109, Graphics.FONT_NUMBER_MILD, fields.timerSecs);
+//		        }
+//		        textL(dc, 186, 82, Graphics.FONT_XTINY,  "TIMER");
+//	        }	    
+//	    } 
         
 //        //Pace
 //        textC(dc, 109, 107, Graphics.FONT_NUMBER_MEDIUM, fields.pace10s);
 //        textC(dc, 109,  79, Graphics.FONT_XTINY,  		 "PACE");
 		
-		
-		if(fields.wktFullTime == null) {
-			textR(dc, 178, 164, Graphics.FONT_NUMBER_MEDIUM, fields.fmtSecs(fields.wktFullTime));
-	    } else {
-        	if(fields.counter % 3 == 0 && fields.wktFullTime != null) {
-		        textR(dc, 178, 164, Graphics.FONT_NUMBER_MEDIUM, fields.wktEndTime);
-	        } else {
-				textR(dc, 178, 164, Graphics.FONT_NUMBER_MEDIUM, fields.fmtSecs(fields.wktFullTime));
-	        }	    
-	    } 
-		
-		if(fields.wktDesc != null) {
-			textC(dc, 109, 40, Graphics.FONT_TINY, fields.wktDesc);
-		}
+//		
+//		if(fields.wktFullTime == null) {
+//			textR(dc, 178, 164, Graphics.FONT_NUMBER_MEDIUM, fields.fmtSecs(fields.wktFullTime));
+//	    } else {
+//        	if(fields.counter % 3 == 0 && fields.wktFullTime != null) {
+//		        textR(dc, 178, 164, Graphics.FONT_NUMBER_MEDIUM, fields.wktEndTime);
+//	        } else {
+//				textR(dc, 178, 164, Graphics.FONT_NUMBER_MEDIUM, fields.fmtSecs(fields.wktFullTime));
+//	        }	    
+//	    } 
+//		
+//		if(fields.wktDesc != null) {
+//			textC(dc, 109, 40, Graphics.FONT_TINY, fields.wktDesc);
+//		}
 		//Interval Timer
 		//Elapsed Time
 		//Workout Remaining Time
@@ -133,18 +133,18 @@ class iWorkoutView extends WatchUi.DataField {
 
 //        drawBattery(dc);
         drawLayout(dc);
-
-		if(fields.alertLabel != null) {
-			alert(dc, fields.alertLabel, fields.alertValue);
-		}  
-		
-		if(fields.wktMsg != null) {
-			workoutMessage(dc, fields.wktMsg, fields.wktMsgColor);
-			if(fields.wktRepeat != null) {
-				textC(dc, 109,  45, Graphics.FONT_TINY, 
-					"Repeat " + fields.wktCurrentRepeat.format("%d") + "/" + fields.wktRepeat.format("%d"));
-			}
-		}
+//
+//		if(fields.alertLabel != null) {
+//			alert(dc, fields.alertLabel, fields.alertValue);
+//		}  
+//		
+//		if(fields.wktMsg != null) {
+//			workoutMessage(dc, fields.wktMsg, fields.wktMsgColor);
+//			if(fields.wktRepeat != null) {
+//				textC(dc, 109,  45, Graphics.FONT_TINY, 
+//					"Repeat " + fields.wktCurrentRepeat.format("%d") + "/" + fields.wktRepeat.format("%d"));
+//			}
+//		}
 		
         return true;
 	}
