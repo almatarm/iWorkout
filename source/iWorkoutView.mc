@@ -33,9 +33,7 @@ class iWorkoutView extends WatchUi.DataField {
         dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
         dc.clear();
         
-		//Time
-        textL(dc, 75, 206, Graphics.FONT_TINY, fields.time);       
-        
+		
 //        //Cadence
 //        drawBackground(dc, fields.cadenceZoneColor, 00, 73, 72, 60);
 //        textC(dc, 36, 107, Graphics.FONT_NUMBER_MEDIUM, fields.cadence);
@@ -43,10 +41,20 @@ class iWorkoutView extends WatchUi.DataField {
 //                
         //HR
 //		drawBackground(dc, fields.hrZoneColor, 0, 73, 109, 72);
-//        textC(dc, 55, 109, Graphics.FONT_NUMBER_MEDIUM, 
-//        	fields.counter % 3 == 0 ? fields.hr : fields.hrZone);
-//        textC(dc, 55, 81,  Graphics.FONT_XTINY,  	     "HR");
-//        
+        if(fields.wktMinHR != null && fields.hrN < fields.wktMinHR) {
+        	drawBackground(dc, Graphics.COLOR_BLUE, 0, 73, 109, 72);
+    		textR(dc, 107, 134,  Graphics.FONT_TINY, "-" +  ( fields.wktMinHR - fields.hrN ).format("%d"));
+    	} else if(fields.wktMaxHR != null && fields.hrN > fields.wktMaxHR) {
+    		drawBackground(dc, Graphics.COLOR_RED, 0, 73, 109, 72);
+    		textR(dc, 107, 134,  Graphics.FONT_TINY, "+" + (fields.hrN - fields.wktMaxHR ).format("%d"));
+    	}
+    	
+        textC(dc, 55, 109, Graphics.FONT_NUMBER_MEDIUM, 
+        	fields.counter % 3 == 0 ? fields.hr : fields.hrZone);
+        textC(dc, 55, 81,  Graphics.FONT_XTINY, "HR");
+        
+        
+        
 //        if(fields.wktMinHR != null && fields.hrN < fields.wktMinHR) {
 //        	System.prinln(fields.hrN);
 //        	System.println(fields.wktMinHR);
@@ -132,7 +140,12 @@ class iWorkoutView extends WatchUi.DataField {
 		
 //        textL(dc, 124, 186, Graphics.FONT_XTINY, "A PACE");
 
-		     
+		//Time
+        textL(dc, 75, 206, Graphics.FONT_TINY, fields.time);       
+        
+        if (fields.wktMsg != null) {
+	        textC(dc, 109, 25, Graphics.FONT_TINY, fields.wktMsg);           
+        }    
 
 //        drawBattery(dc);
         drawLayout(dc);

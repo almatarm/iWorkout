@@ -50,7 +50,7 @@ class InfoFields {
 	  
 	  
 	var workout = //null;
-    	"#F720#T600&HZ4%Warm up#R5%Repeat 5 Times#T120&HZ4%Run#T60&HZ2%Rest#T60&HZ4%Run#T90&HZ2%Rest#E#%Cool down"; 
+    	"#F720#T600&HZ2%Warm up#R5%Repeat 5 Times#T120&HZ4%Run#T60&HZ2%Rest#T60&HZ4%Run#T90&HZ2%Rest#E#%Cool down"; 
 //    	"#T10%Warm Up#T9&HZ3#T5%Rest#T5%Cool Down#";
 //    	"#T120&HZ1%Hello#";
 //		"#T30%Startup#R3#T10%Run#T10%Rest#E#T60%Cool Down#";
@@ -107,84 +107,84 @@ class InfoFields {
 				distAlert = null;
 			}
 		}
-		
-		//Pace
-       	if (info.currentSpeed != null && info.currentSpeed > 0) {
-        	var idx = curPos % lastSecs.size();
-            curPos++;
-            lastSecs[idx] = info.currentSpeed;
-       	}
-		var avg10s = getNAvg(lastSecs, curPos, 10);
-        pace10s =  fmtSecs(toPace(avg10s));
-        paceAvg = fmtSecs(toPace(info.averageSpeed));
-        
-        //Timer
-        var elapsed = info.timerTime;
-        var elapsedSecs = null;
-        if (elapsed != null) {
-            elapsed /= 1000;
-
-            if (elapsed >= 3600) {
-                elapsedSecs = (elapsed.toLong() % 60).format("%02d");
-            }
-        }
-
-        timer = fmtSecs(elapsed);
-        timerSecs = elapsedSecs;
-
-		//Time
-		time = fmtTime(Sys.getClockTime());
-        
-        wktEndTime = fmtEndTime(wktFullTime == null? 0 : wktFullTime);
-//        wktEndTime = 
+//		
+//		//Pace
+//       	if (info.currentSpeed != null && info.currentSpeed > 0) {
+//        	var idx = curPos % lastSecs.size();
+//            curPos++;
+//            lastSecs[idx] = info.currentSpeed;
+//       	}
+//		var avg10s = getNAvg(lastSecs, curPos, 10);
+//        pace10s =  fmtSecs(toPace(avg10s));
+//        paceAvg = fmtSecs(toPace(info.averageSpeed));
+//        
+//        //Timer
+//        var elapsed = info.timerTime;
+//        var elapsedSecs = null;
+//        if (elapsed != null) {
+//            elapsed /= 1000;
+//
+//            if (elapsed >= 3600) {
+//                elapsedSecs = (elapsed.toLong() % 60).format("%02d");
+//            }
+//        }
+//
+//        timer = fmtSecs(elapsed);
+//        timerSecs = elapsedSecs;
+//
+//		//Time
+//		time = fmtTime(Sys.getClockTime());
+//        
+//        wktEndTime = fmtEndTime(wktFullTime == null? 0 : wktFullTime);
+////        wktEndTime = 
         		
         //HR	
-		hr = toStr(info.currentHeartRate);
-		hrN = info.currentHeartRate;
-        hrZoneColor = zoneColor(hrN, userZones);
+		hr = toStr(info.currentHeartRate + 15);
+		hrN = info.currentHeartRate + 15;
+//        hrZoneColor = zoneColor(hrN, userZones);
         hrZone = zoneNumber(hrN, userZones).format("%.1f");
         
-        hrLabel = "HR";
-        if(wktMinHR != null && info.currentHeartRate < wktMinHR) {
-    		hrLabel = "Below HR\n+" + ( wktMinHR - info.currentHeartRate ).format("%d");
-    	} else if(wktMaxHR != null && info.currentHeartRate > wktMaxHR) {
-    		hrLabel = "Above HR\n-" + (info.currentHeartRate - wktMaxHR ).format("%d");
-    	}
+//        hrLabel = "HR";
+//        if(wktMinHR != null && hrN < wktMinHR) {
+//    		hrLabel = "Below +" + ( wktMinHR - hrN ).format("%d");
+//    	} else if(wktMaxHR != null && hrN > wktMaxHR) {
+//    		hrLabel = "Above -" + (hrN - wktMaxHR ).format("%d");
+//    	}
         
-        //Cadence
-        cadence = toStr(info.currentCadence);
-        cadenceN = info.currentCadence;
-        cadenceZoneColor = zoneColor(cadenceN, cadenceZones);
-        
-        //Distance
-        distance = toDistanceStr(info.elapsedDistance);
-        
-        //Calories
-        calories = info.calories;
-        
-        //Alerts
-        if(calories != null && calories != 0 
-        	&& calories % calAlertFreq == 0 
-        	&& counter - alertTime > 10) {  	
-        	calAlert = calories;
-        	alertTime = counter;
-        } else if(info.elapsedDistance != null && info.elapsedDistance > 10
-        	&& info.elapsedDistance.toNumber() % distAlertFreq < 6 
-        	&& counter - alertTime > 10) {
-        	distAlert = distance;
-        	alertTime = counter;
-    	}
-    	
-    	if(calAlert != null) {
-    		alertLabel = "CALORIES";
-    		alertValue = calAlert;
-    		alertType  = 1; 
-    	} else if(distAlert != null) {
-    		alertLabel = "DISTANCE";
-    		alertValue = distAlert;
-    		alertType  = 2;
-    	}
-    	
+//        //Cadence
+//        cadence = toStr(info.currentCadence);
+//        cadenceN = info.currentCadence;
+//        cadenceZoneColor = zoneColor(cadenceN, cadenceZones);
+//        
+//        //Distance
+//        distance = toDistanceStr(info.elapsedDistance);
+//        
+//        //Calories
+//        calories = info.calories;
+//        
+//        //Alerts
+//        if(calories != null && calories != 0 
+//        	&& calories % calAlertFreq == 0 
+//        	&& counter - alertTime > 10) {  	
+//        	calAlert = calories;
+//        	alertTime = counter;
+//        } else if(info.elapsedDistance != null && info.elapsedDistance > 10
+//        	&& info.elapsedDistance.toNumber() % distAlertFreq < 6 
+//        	&& counter - alertTime > 10) {
+//        	distAlert = distance;
+//        	alertTime = counter;
+//    	}
+//    	
+//    	if(calAlert != null) {
+//    		alertLabel = "CALORIES";
+//    		alertValue = calAlert;
+//    		alertType  = 1; 
+//    	} else if(distAlert != null) {
+//    		alertLabel = "DISTANCE";
+//    		alertValue = distAlert;
+//    		alertType  = 2;
+//    	}
+//    	
     	if(workout != null && workout.length() > 0) {
     		processWorkout(info, status);
     	}
@@ -280,6 +280,9 @@ class InfoFields {
     					wktMaxHR = userZones[zone];
     					wktMsg += "\n Zone " + zone.format("%d");
     					line2 = "Zone " + zone.format("%d");
+    					
+    					System.println("Zone " + zone.format("%d") + ": " + wktMinHR.format("%d") 
+    						+ " - " +  wktMaxHR.format("%d"));
     				}
     				inWktStep = true;
     			}
